@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Juno</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="content">
+        <nav class="navbar">
+            <a href="popup.html">About</a>
+            <a href="profile.html">Profiles</a>
+            <a href="packages.html">Packages</a>
+            <a href= "FAQ.html">FAQ</a>
+        </nav>
+
+        <h1 class="title">Profiles</h1>
+        <p>Used to customize the behavior of Juno, shaping its interactions based on specific users, technologies, and desired persona traits.</p>
+
+        <p><a href="#" id="example-profile-link">Profile Overview</a></p>
+
+        <table border="1" class="attribute-table" id="profile-table" style="display: none;">
+                <tr>
+                    <th>Attribute</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>The name of the entity</td>
+                </tr>
+                <tr>
+                    <td>gender</td>
+                    <td>Gender of the entity</td>
+                </tr>
+                <tr>
+                    <td>language</td>
+                    <td>Language entity speaks in (Refer to documentation for available languages)</td>
+                </tr>
+                <tr>
+                    <td>personality</td>
+                    <td>Describes the overall temperament of the entity</td>
+                </tr>
+                <tr>
+                    <td>persona</td>
+                    <td>The entity will act as if they are this persona</td>
+                </tr>
+                <tr>
+                    <td>prompt</td>
+                    <td>Prompt used to query GPT</td>
+                </tr>
+                <tr>
+                    <td>role</td>
+                    <td>Role of the entity</td>
+                </tr>
+                <tr>
+                    <td>gpt_model</td>
+                    <td>Model used for generating responses (Fine-tuning recommended. See /training)</td>
+                </tr>
+                <tr>
+                    <td>package</td>
+                    <td>Optional package for added functionalities. See packages for more information</td>
+                </tr>
+                <tr>
+                    <td>startup_sound</td>
+                    <td>Whether to play a startup sound</td>
+                </tr>
+                <tr>
+                    <td>voice_name</td>
+                    <td>Voice used for text-to-speech. In this example, I am using a custom-made voice modeled after Barack Obama, created using Elevenlabs</td>
+                </tr>
+                <tr>
+                    <td>text_to_speech_engine</td>
+                    <td>Engine used for text-to-speech (e.g., Elevenlabs or Azure)</td>
+                </tr>
+                <tr>
+                    <td>voice_recognition_engine</td>
+                    <td>Engine used for voice recognition</td>
+                </tr>
+                <tr>
+                    <td>user_name</td>
+                    <td>Name of the user interacting with the entity</td>
+                </tr>
+                <tr>
+                    <td>user_gender</td>
+                    <td>Gender of the user</td>
+                </tr>
+                <tr>
+                    <td>user_age</td>
+                    <td>Age of the user</td>
+                </tr>
+        </table>
+        
+        <label for="profile-selector" class="label">Select a profile</label>
+        <select id="profile-selector" class="dropdown">
+            <option value="profile1">Profile 1</option>
+            <option value="profile2">Profile 2</option>
+            <!-- Add more profiles as needed -->
+        </select>
+        <button id="update-button" class="button">Update</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
