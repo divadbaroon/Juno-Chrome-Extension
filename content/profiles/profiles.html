@@ -2,25 +2,24 @@
 <html>
 <head>
     <title>Juno</title>
-    <link rel="stylesheet" type="text/css" href="popup.css">
+    <link rel="stylesheet" type="text/css" href="profiles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <div class="content">
+
         <nav class="navbar">
-            <a href="popup.html">About</a>
-            <a href="profile.html">Profiles</a>
-            <a href="packages.html">Packages</a>
-            <a href= "FAQ.html">FAQ</a>
-        </nav>
+            <a href="../../popup/popup.html">About</a>
+            <a href="profiles.html">Profiles</a>
+            <a href="../extensions/extensions.html">Extensions</a>
+            <a href= "../faq/faq.html">FAQ</a>
+        </nav>  
 
         <h1 class="title">Profiles</h1>
         <p>Used to customize the behavior of Juno, shaping its interactions based on specific users, technologies, and desired persona traits.</p>
 
-        <p><a href="#" id="example-profile-link">Profile Overview</a></p>
-
-        <table border="1" class="attribute-table" id="profile-table" style="display: none;">
-                <tr>
+        <table border="1" class="attribute-table" id="default-profile-table" style="display: none;">
+            <tr>
                     <th>Attribute</th>
                     <th>Description</th>
                 </tr>
@@ -92,13 +91,13 @@
         
         <label for="profile-selector" class="label">Select a profile</label>
         <select id="profile-selector" class="dropdown">
-            <option value="profile1">Profile 1</option>
-            <option value="profile2">Profile 2</option>
+            <option value="default">Default</option>
             <!-- Add more profiles as needed -->
         </select>
-        <button id="update-button" class="button">Update</button>
+        <button id="view-profile-button" class="button">View</button>
+
     </div>
 
-    <script src="popup.js"></script>
+    <script src="profiles.js"></script>
 </body>
 </html>

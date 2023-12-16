@@ -6,7 +6,8 @@
   [
     "contextMenus",
     "activeTab",
-    "scripting"  
+    "scripting",
+    "tabs"
   ],
   "host_permissions": [
     "http://localhost:8000/"  
@@ -17,24 +18,19 @@
   },
   "action": 
   {  
-    "default_popup": "popup.html",
+    "default_popup": "popup/popup.html",
     "default_icon": {
-      "16": "juno_icon.png"
+      "16": "images/juno_icon.png"
     }
   },
   "icons": 
   {
-    "16": "juno_icon.png"
+    "16": "images/juno_icon.png"
   },
-  "commands": 
-  {
-    "_execute_action": 
-    {  
-      "suggested_key": 
-      {
-        "default": "Ctrl+Shift+Y",
-        "mac": "Ctrl+Shift+Y"
-      }
+  "commands": {
+    "open-google": {
+      "suggested_key": "Ctrl+Shift+Y",
+      "description": "Opens Google"
     }
   }
 }

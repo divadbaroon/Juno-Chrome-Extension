@@ -1,10 +1,8 @@
-// Listening for a command (keyboard shortcut)
-chrome.commands.onCommand.addListener(function(command) {
-    if (command === "_execute_action") {
-        // Assuming you want to send a fixed text "Hi" when the shortcut is pressed
-        sendTextToApi("Hi");
+chrome.commands.onCommand.addListener((command) => {
+    if (command === "open-google") { 
+        chrome.tabs.create({ url: 'https://www.google.com/' }); 
     }
-});
+  });
 
 // Function to send the selected text to the server
 function sendTextToApi(text) {

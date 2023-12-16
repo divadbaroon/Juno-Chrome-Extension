@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Juno</title>
+    <link rel="stylesheet" type="text/css" href="extensions.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="content">
+
+        <nav class="navbar">
+            <a href="../../popup/popup.html">About</a>
+            <a href="../profiles/profiles.html">Profiles</a>
+            <a href="extensions.html">Extensions</a>
+            <a href= "../faq/faq.html">FAQ</a>
+        </nav>  
+
+        <h1 class="title">Extensions</h1>
+        <p>Define custom commands, guiding entity behavior based on user input.</p>
+
+        <table border="1" class="attribute-table" id="basic-table" style="display: none;">
+            <tr>
+                    <th>Input</th>
+                    <th>Response</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>Mute</td>
+                    <td>I am now muted</td>
+                    <td>Mutes Juno's response</td>
+                </tr>
+                <tr>
+                    <td>Unmute</td>
+                    <td>I am now unmuted</td>
+                    <td>Unmutes Juno's response</td>
+                </tr>
+                <tr>
+                    <td>Pause</td>
+                    <td>I am now paused</td>
+                    <td>Pauses Juno's functionalities</td>
+                </tr>
+                <tr>
+                    <td>Unpause</td>
+                    <td>I am now unpaused</td>
+                    <td>Unpauses Juno's functionalities</td>
+                </tr>
+                <tr>
+                    <td>Exit</td>
+                    <td>Exiting, goodbye!</td>
+                    <td>Terminates the program</td>
+                </tr>
+        </table>
+
+        <table border="1" class="attribute-table" id="personalization-table" style="display: none;">
+            <tr>
+                    <th>Input</th>
+                    <th>Response</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>Change your language to {language}</td>
+                    <td>Changing language to {language}</td>
+                    <td>Changes Juno's language</td>
+                </tr>
+                <tr>
+                    <td>Change your gender to {gender}</td>
+                    <td>I have changed my gender to {gender}</td>
+                    <td>Changes Juno's gender</td>
+                </tr>
+                <tr>
+                    <td>Change your persona to {role}</td>
+                    <td>Changing persona to {persona}</td>
+                    <td>Changes Juno's persona to {persona}</td>
+                </tr>
+                <tr>
+                    <td>Change voice</td>
+                    <td>I have changed my voice</td>
+                    <td>Changes Juno's voice</td>
+                </tr>
+        </table>
+
+        <table border="1" class="attribute-table" id="assistant-table" style="display: none;">
+            <tr>
+                    <th>Input</th>
+                    <th>Response</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>What is the weather in {location}</td>
+                    <td>The weather in {location} is {temperature} degrees.</td>
+                    <td>Fetches temperature via OpenWeatherMap API</td>
+                </tr>
+                <tr>
+                    <td>Translate {speech} into {language}</td>
+                    <td>{translated_speech}</td>
+                    <td>Uses Azure for speech translation</td>
+                </tr>
+                <tr>
+                    <td>Turn lights {off/on}</td>
+                    <td>None</td>
+                    <td>Controls smart LED lights</td>
+                </tr>
+                <tr>
+                    <td>Change light color to {color}</td>
+                    <td>None</td>
+                    <td>Changes light color</td>
+                </tr>
+                <tr>
+                    <td>Play {song}</td>
+                    <td>None</td>
+                    <td>Plays {song} via Spotify API</td>
+                </tr>
+                <tr>
+                    <td>Pause {song}</td>
+                    <td>None</td>
+                    <td>Pauses {song} via Spotify API</td>
+                </tr>
+                <tr>
+                    <td>Play next {song}</td>
+                    <td>None</td>
+                    <td>Plays next {song} via Spotify API</td>
+                </tr>
+                <tr>
+                    <td>Lower Volume</td>
+                    <td>None</td>
+                    <td>Lowers volume by 10%</td>
+                </tr>
+                <tr>
+                    <td>Increase Volume</td>
+                    <td>None</td>
+                    <td>Increases volume by 10%</td>
+                </tr>
+                <tr>
+                    <td>Set an alarm for {day and time}</td>
+                    <td>Setting an alarm for {day and time}</td>
+                    <td>Sets an alarm for {day and time}</td>
+                </tr>
+                <tr>
+                    <td>Set a reminder for {day and time}</td>
+                    <td>Setting a reminder for {day and time}</td>
+                    <td>Sets a reminder for {day and time}</td>
+                </tr>
+                <tr>
+                    <td>Set an timer for {time metric}</td>
+                    <td>Setting a timer for {time metric}</td>
+                    <td>Sets a timer for {time metric}</td>
+                </tr>
+                <tr>
+                    <td>Give me the news</td>
+                    <td>Sure here is what's going on in the world. Gives a summary of current world events</td>
+                    <td>Fetches top news headlines via News API</td>
+                </tr>
+                <tr>
+                    <td>Open [website]</td>
+                    <td>Opening [website]</td>
+                    <td>Opens [website] in webbrowser</td>
+                </tr>       
+                <tr>
+                    <td>Search Google for [query]</td>
+                    <td>Searching Google for [query]</td>
+                    <td>Conducts a Google search for [query]</td>
+                </tr> 
+                <tr>
+                    <td>Search Youtube for [query]</td>
+                    <td>Searching Youtube for [query]</td>
+                    <td>Conducts a Youtube search for [query]</td>
+                </tr>
+        </table>
+        
+        <label for="extension-selector" class="label">Select an extension</label>
+        <select id="extension-selector" class="dropdown">
+            <option value="basic">Basic</option>
+            <option value="personalization">Personalization</option>
+            <option value="assistant">Assistant</option>
+            <!-- Add more profiles as needed -->
+        </select>
+        <button id="view-button" class="button">View</button>
+    </div>
+
+    <script src="extensions.js"></script>
+</body>
+</html>
