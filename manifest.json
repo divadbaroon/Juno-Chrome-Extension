@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Text Processor",
+  "name": "Juno",
   "version": "1.0",
   "permissions": 
   [
@@ -20,12 +20,12 @@
   {  
     "default_popup": "popup/popup.html",
     "default_icon": {
-      "16": "images/juno_icon.png"
+      "16": "images/juno_icon2.png"
     }
   },
   "icons": 
   {
-    "16": "images/juno_icon.png"
+    "16": "images/juno_icon2.png"
   },
   "commands": {
     "open-google": {

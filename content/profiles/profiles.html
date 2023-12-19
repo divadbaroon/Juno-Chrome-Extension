@@ -1,103 +1,153 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
     <title>Juno</title>
     <link rel="stylesheet" type="text/css" href="profiles.css">
+
+    <link rel="stylesheet" type="text/css" href="../../popup/changeBackground/changeBackground.css">
+    <link rel="stylesheet" type="text/css" href="../../popup/changeTimeOfDay/changeTimeOfDay.css">
+    <link rel="stylesheet" type="text/css" href="../../popup/menu/menu.css">
+    <link rel="stylesheet" type="text/css" href="../../popup/search/search.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
+
 <body>
-    <div class="content">
-
-        <nav class="navbar">
-            <a href="../../popup/popup.html">Create</a>
-            <a href="profiles.html">Profiles</a>
-            <a href="../extensions/extensions.html">Extensions</a>
-            <a href= "../faq/faq.html">FAQ</a>
-        </nav>  
-
-        <h1 class="title">Profiles</h1>
-        <p>Used to customize the behavior of Juno, shaping its interactions based on specific users, technologies, and desired persona traits.</p>
-
-        <table border="1" class="attribute-table" id="default-profile-table" style="display: none;">
-            <tr>
-                    <th>Attribute</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>name</td>
-                    <td>The name of the entity</td>
-                </tr>
-                <tr>
-                    <td>gender</td>
-                    <td>Gender of the entity</td>
-                </tr>
-                <tr>
-                    <td>language</td>
-                    <td>Language entity speaks in (Refer to documentation for available languages)</td>
-                </tr>
-                <tr>
-                    <td>personality</td>
-                    <td>Describes the overall temperament of the entity</td>
-                </tr>
-                <tr>
-                    <td>persona</td>
-                    <td>The entity will act as if they are this persona</td>
-                </tr>
-                <tr>
-                    <td>prompt</td>
-                    <td>Prompt used to query GPT</td>
-                </tr>
-                <tr>
-                    <td>role</td>
-                    <td>Role of the entity</td>
-                </tr>
-                <tr>
-                    <td>gpt_model</td>
-                    <td>Model used for generating responses (Fine-tuning recommended. See /training)</td>
-                </tr>
-                <tr>
-                    <td>package</td>
-                    <td>Optional package for added functionalities. See packages for more information</td>
-                </tr>
-                <tr>
-                    <td>startup_sound</td>
-                    <td>Whether to play a startup sound</td>
-                </tr>
-                <tr>
-                    <td>voice_name</td>
-                    <td>Voice used for text-to-speech. In this example, I am using a custom-made voice modeled after Barack Obama, created using Elevenlabs</td>
-                </tr>
-                <tr>
-                    <td>text_to_speech_engine</td>
-                    <td>Engine used for text-to-speech (e.g., Elevenlabs or Azure)</td>
-                </tr>
-                <tr>
-                    <td>voice_recognition_engine</td>
-                    <td>Engine used for voice recognition</td>
-                </tr>
-                <tr>
-                    <td>user_name</td>
-                    <td>Name of the user interacting with the entity</td>
-                </tr>
-                <tr>
-                    <td>user_gender</td>
-                    <td>Gender of the user</td>
-                </tr>
-                <tr>
-                    <td>user_age</td>
-                    <td>Age of the user</td>
-                </tr>
-        </table>
-        
-        <label for="profile-selector" class="label">Select a profile</label>
-        <select id="profile-selector" class="dropdown">
-            <option value="default">Default</option>
-            <!-- Add more profiles as needed -->
-        </select>
-        <button id="view-profile-button" class="button">View</button>
-
+    <!-- Side Navigation Menu -->
+    <div id="dropdownMenu" class="dropdown-menu">
+        <a href="../profiles/profiles.html">About</a>
+        <a href="../profiles/profiles.html">Create</a>
+        <a href="../profiles/profiles.html">Profiles</a>
+        <a href="../profiles/extensions.html">Extensions</a>
+        <a href="../settings/settings.html">Settings</a>
+        <a href="../profiles/FAQ.html">FAQ</a>
     </div>
+    
+    <div class="main-content">
+        <!-- Settings Icon -->
+        <div class="settings-container">
+            <!-- Settings Button -->
+            <button id="settingsButton" class="settings-icon">
+                <img src="../../images/lines.png" alt="Settings" />
+            </button>
 
+        </div>
+
+        <!-- Control Panel for Filter and Search -->
+        <div class="control-panel">
+            <select id="filterDropdown">
+                <option value="all">All Profiles</option>
+                <!-- More options -->
+            </select>
+            <input type="text" id="searchInput" placeholder="Search profiles...">
+        </div>
+
+         <!-- Profiles Library Container -->
+        <div class="profile-library">
+            <div class="profiles-grid">
+                <!-- Profile Card 1 -->
+                <div class="profile-card">
+                    <img src="../../images/profiles/artist.png" alt="Profile 1">
+                    <h3>Artist</h3>
+                    <p>A creative spirit with a flair for visual storytelling. Versatile across digital and traditional mediums, their art is both unique and thought-provoking.</p>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="profile-card">
+                    <img src="../../images/profiles/astronaut.png" alt="Profile 2">
+                    <h3>astronaut</h3>
+                    <p>A brave explorer of the cosmos, adept in advanced sciences and engineering. Skilled in navigating spacecraft, conducting experiments in space, and collaborating on international space missions.</p>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="profile-card">
+                    <img src="../../images/profiles/coder.png" alt="Profile 2">
+                    <h3>Coder</h3>
+                    <p>A detail-oriented tech enthusiast with a talent for problem-solving. Skilled in various programming languages, they create innovative and efficient software solutions.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="../../images/profiles/librarian.png" alt="Profile 1">
+                    <h3>Librarian</h3>
+                    <p>A knowledgeable and organized custodian of literature and information. Expert in research and curation, they guide others in their quest for knowledge with a vast resource pool.</p>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="profile-card">
+                    <img src="../../images/profiles/timetravler.png" alt="Profile 2">
+                    <h3>Time Travler</h3>
+                    <p>A curious adventurer skilled in navigating different eras. Enjoys uncovering historical mysteries and adept at adapting to diverse cultures and time periods.</p>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="profile-card">
+                    <img src="../../images/juno_icon.png" alt="Profile 2">
+                    <h3>Oswald</h3>
+                    <p>Description for Profile 2.</p>
+                </div>
+
+                <!-- Profile Card 1 -->
+                <div class="profile-card">
+                    <img src="../../images/juno_icon.png" alt="Profile 1">
+                    <h3>Obama</h3>
+                    <p>Description for Profile 1.</p>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="profile-card">
+                    <img src="../../images/juno_icon.png" alt="Profile 2">
+                    <h3>Oswald</h3>
+                    <p>Description for Profile 2.</p>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="profile-card">
+                    <img src="../../images/juno_icon.png" alt="Profile 2">
+                    <h3>Oswald</h3>
+                    <p>Description for Profile 2.</p>
+                </div>
+
+                <div class="profile-card">
+                    <img src="../../images/juno_icon.png" alt="Profile 1">
+                    <h3>Obama</h3>
+                    <p>Description for Profile 1.</p>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="profile-card">
+                    <img src="../../images/juno_icon.png" alt="Profile 2">
+                    <h3>Oswald</h3>
+                    <p>Description for Profile 2.</p>
+                </div>
+
+                <!-- Profile Card 2 -->
+                <div class="profile-card">
+                    <img src="../../images/juno_icon.png" alt="Profile 2">
+                    <h3>Oswald</h3>
+                    <p>Description for Profile 2.</p>
+                </div>
+
+                <!-- More Profile Cards... -->
+            </div>
+        </div>
+
+        <!-- Button to change the time of day -->
+        <button id="changeTimeOfDay" class="changeTimeOfDay-icon">
+            <img src="../../images/sun3.png" alt="Settings" />
+        </button>
+
+        <!-- Button to change background -->
+        <button id="imageButton">
+            <img src="../../images/magicwand.png"/>
+        </button>
+    </div>
+    
+    <script src="../../popup/changeBackground/changeBackground.js"></script>
+    <script src="../../popup/changeTimeOfDay/changeTimeOfDay.js"></script>
+    <script src="../../popup/menu/menu.js"></script>
+    <script src="../../popup/search/search.js"></script>
     <script src="profiles.js"></script>
 </body>
 </html>
