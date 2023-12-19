@@ -1,24 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
     <title>Juno</title>
     <link rel="stylesheet" type="text/css" href="popup.css">
+
+    <link rel="stylesheet" type="text/css" href="changeBackground/changeBackground.css">
+    <link rel="stylesheet" type="text/css" href="changeTimeOfDay/changeTimeOfDay.css">
+    <link rel="stylesheet" type="text/css" href="menu/menu.css">
+    <link rel="stylesheet" type="text/css" href="search/search.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
+
 <body>
-    <div class="content">
-        <img src="../images/juno4.png" alt="Juno Logo" class="logo">
+    <!-- Side Navigation Menu -->
+    <div id="dropdownMenu" class="dropdown-menu">
+        <a href="../content/profiles/profiles.html">Profiles</a>
+        <a href="../content/profiles/extensions.html">Extensions</a>
+        <a href="../content/settings/settings.html">Settings</a>
+        <a href="../content/profiles/FAQ.html">FAQ</a>
+    </div>
+    
+    <div class="main-content">
+        <!-- Settings Icon -->
+        <div class="settings-container">
+            <!-- Settings Button -->
+            <button id="settingsButton" class="settings-icon">
+                <img src="../images/lines.png" alt="Settings" />
+            </button>
 
-        <nav class="navbar">
-            <a href="popup.html">About</a>
-            <a href="../content/profiles/profiles.html">Profiles</a>
-            <a href="../content/extensions/extensions.html">Extensions</a>
-            <a href= "../content/faq/faq.html">FAQ</a>
-        </nav>    
+        </div>
 
-        <p>Easily customize, create, and interact with your own personalized and intelligent entities.</p>
+        <!-- Search Container -->
+        <div class="search-container">
+            <div class="juno-title-container">
+                <div class="juno-title">Juno</div>
+            </div>
+            <div class="search-input-container">
+                <input type="text" id="searchInput" placeholder="Search..." />
+                <button id="searchButton">Search</button>
+            </div>
+        </div>
 
-    <script src="popup.js"></script>
+        <!-- Button to change the time of day -->
+        <button id="changeTimeOfDay" class="changeTimeOfDay-icon">
+            <img src="../images/sun3.png" alt="Settings" />
+        </button>
+
+        <!-- Button to change background -->
+        <button id="imageButton">
+            <img src="../images/magicwand.png"/>
+        </button>
+    </div>
+    
+    <script src="changeBackground/changeBackground.js"></script>
+    <script src="changeTimeOfDay/changeTimeOfDay.js"></script>
+    <script src="menu/menu.js"></script>
+    <script src="search/search.js"></script>
 </body>
 </html>

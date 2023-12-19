@@ -1,0 +1,106 @@
+/* moved content to the right as menu opens */
+.main-content {
+    transition: margin-right 0.3s;
+    position: relative; 
+}
+
+.menu-open {
+    margin-right: 210px; /* Adjust based on the width of your menu */
+}
+
+
+/* Navigation Bar Styles */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #f4f7f9; /* Light background color */
+    padding: 10px 0;
+    border-bottom: 2px solid #e1e4e8; /* Subtle border for separation */
+    margin-bottom: 20px;
+}
+
+.navbar a {
+    color: #007acc; /* Light blue theme color */
+    padding: 8px 12px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #e1e4e8; /* Slightly darker blue for contrast */
+    color: #005792;
+}
+
+/* Settings Container */
+.settings-container {
+    position: absolute; /* or 'fixed' for a fixed position */
+    top: -165px;
+    right: -140px;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.settings-icon {
+    cursor: pointer;
+    background: transparent;
+    border: none; /* Remove constant border */
+    border-radius: 50%; /* Circular shape */
+    transition: background 0.3s ease-in-out; /* Smooth transition */
+    padding: 5px; /* Space around the image */
+}
+
+.settings-icon img {
+    display: block;
+    width: 55px;
+    height: auto;
+    transition: filter 0.3s ease-in-out;
+}
+
+.settings-icon:hover img {
+    filter: brightness(120%);
+}
+
+/* Search Container */
+.search-container {
+    display: flex;
+    flex-direction: column; /* Align items in a row */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: fixed; /* Fixed position relative to the viewport */
+    top: 0; /* Align to the top */
+    right: -250px; /* Start off-screen to the right */
+    height: 100%; /* Full height */
+    width: 100px; /* Width of the dropdown menu */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden; /* For border-radius to take effect on children */
+    transition: right 0.3s ease-in-out; /* Smooth slide-in transition */
+}
+
+@keyframes fadeIn {
+    from { right: -250px; }
+    to { right: 0; }
+}
+
+/* Dropdown Menu Links */
+.dropdown-menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    color: #333;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f2f2f2; 
+    cursor: pointer;
+}

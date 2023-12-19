@@ -1,0 +1,33 @@
+.change-background {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.change-background:hover {
+    background-color: #005792;
+}
+
+/* For Wand */
+#imageButton {
+    position: absolute; /* Fixed position relative to the viewport */
+    bottom: 10px;    /* 10px from the bottom */
+    top: 380px;
+    right: -140px;     /* 10px from the right */
+    border: none;    /* Removes the border */
+    outline: none;   /* Removes the outline */
+    background: none;/* Removes the default background */
+    cursor: pointer; /* Changes cursor on hover */
+}
+
+#imageButton img {
+    width: 55px;     /* Width of the image */
+    height: auto;    /* Maintain aspect ratio */
+}
