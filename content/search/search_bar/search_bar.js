@@ -12,10 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function displaySearchResults() {
         var userInput = searchInput.value.trim();
         if (userInput) {
-            searchResults.innerHTML = '<p>' + userInput + '</p>'; // Display user input
-            searchResults.style.display = 'block'; // Show results
+            searchResults.innerHTML = '<p>' + userInput + '</p>'; 
+            searchResults.style.display = 'block'; 
         } else {
-            searchResults.style.display = 'none'; // Hide results if no input
+            searchResults.style.display = 'none'; 
         }
     }
 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+    <title>Juno</title>
+
+    <link rel="stylesheet" type="text/css" href="../../utils/changeBackground/changeBackground.css">
+    <link rel="stylesheet" type="text/css" href="../../utils/changeTimeOfDay/changeTimeOfDay.css">
+    <link rel="stylesheet" type="text/css" href="../../utils/menu/menu.css">
+    <link rel="stylesheet" type="text/css" href="search_bar/search_bar.css">
+    <link rel="stylesheet" type="text/css" href="search.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+    <!-- Side Navigation Menu -->
+    <div id="dropdownMenu" class="dropdown-menu">
+        <a href="../../popup/popup.html">About</a>
+        <a href="search.html">Engine</a>
+        <a href="../profiles/profiles.html">Profiles</a>
+        <a href="../extensions/extensions.html">Extensions</a>
+        <a href="../settings/settings.html">Settings</a>
+        <a href="../faq/faq.html">FAQ</a>
+    </div>
+    
+    <div class="main-content">
+        <!-- Settings Icon -->
+        <div class="settings-container">
+            <!-- Settings Button -->
+            <button id="settingsButton" class="settings-icon">
+                <img src="../../images/lines.png" alt="Settings" />
+            </button>
+
+        </div>
+
+        <!-- Search Container -->
+        <div class="search-container">
+            <div class="engine-title">
+                <h1>Engine</h1>
+                <p>Describe Your Ideal Digital Companion</p>
+            </div>
+            <div class="search-input-container">
+                <input type="text" id="searchInput" placeholder="Search..." />
+                <button id="searchButton">Search</button>
+            </div>
+        </div>
+
+        <!-- Button to change the time of day -->
+        <button id="changeTimeOfDay" class="changeTimeOfDay-icon">
+            <img src="../../images/sun3.png" alt="Settings" />
+        </button>
+
+        <!-- Button to change background -->
+        <button id="imageButton">
+            <img src="../../images/magicwand.png"/>
+        </button>
+    </div>
+    
+    <script src="../../utils/changeBackground/changeBackground.js"></script>
+    <script src="../../utils/changeTimeOfDay/changeTimeOfDay.js"></script>
+    <script src="../../utils/menu/menu.js"></script>
+    <script src="search_bar/search_bar.js"></script>
+</body>
+</html>

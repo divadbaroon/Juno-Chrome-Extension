@@ -7,10 +7,10 @@ body {
     height: 700px;
     width: 700px; 
     background-color: #ffffff; 
-    background-image: url('../../images/day/wow.png');
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-image: url("../../images/beatiful.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
     border-radius: 8px; 
     display: flex;
@@ -21,16 +21,15 @@ body {
 .additional-content {
     padding: 20px;
     text-align: center;
-    background-color: #ffffff; /* Optional: different background color */
-    /* Adjust the height to control where the profiles start */
-    padding-top: 300px; /* Half of the viewport height */
+    background-color: #ffffff; 
+    padding-top: 400px; 
 }
 
 .profile-library {
     max-width: 1200px;
     margin: auto;
     padding: 20px;
-    padding-top: 1220px; /* Half of the viewport height */
+    padding-top: 1220px; 
 
 }
 
@@ -41,13 +40,23 @@ body {
 }
 
 .profile-card {
+    position: relative; 
     width: calc(33.333% - 20px);
     margin: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    overflow: hidden;
+    overflow: hidden; 
     background-color: #ffffff;
     text-align: center;
+}
+.profile-card {
+    cursor: pointer; 
+    transition: box-shadow 0.3s ease, transform 0.3s ease; 
+}
+
+.profile-card:hover {
+    box-shadow: 0 0 25px 10px rgba(173, 216, 230, 1); 
+    transform: scale(1.02); 
 }
 
 .profile-card img {
@@ -68,31 +77,23 @@ body {
 
 @media (max-width: 768px) {
     .profile-card {
-        width: 200px; /* Two cards per row on medium screens */
+        width: 200px; 
     }
 }
 
 @media (max-width: 480px) {
     .profile-card {
-        width: 100%; /* Full width on small screens */
+        width: 100%; 
     }
-}
-
-.control-panel {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    margin-bottom: 20px;
 }
 
 #filterDropdown, #searchInput {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 45%; /* Adjust as needed */
+    width: 45%;
 }
 
-/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .control-panel {
         flex-direction: column;
@@ -102,4 +103,160 @@ body {
         margin-bottom: 10px;
     }
 }
+
+.top-left-button{
+    position: absolute;
+    padding: 3px 6px; 
+    font-size: 0.8em; 
+    border: none;
+    background: none; 
+    cursor: pointer;
+    left: -10px;
+    top: -10px;
+} 
+
+.top-right-button {
+    position: absolute;
+    padding: 5px;
+    border: none;
+    background: none; 
+    cursor: pointer;
+    left: 153px;
+    top: 0px;
+}
+
+/* Styling for the button images */
+.top-left-button img {
+    width: 55px; 
+    height: auto;
+}
+
+/* Styling for the button images */
+.top-right-button img {
+    width: 35px; 
+    height: auto;
+}
+
+/* Optional: Add hover effect for buttons */
+.top-left-button:hover img, .top-right-button:hover img {
+    opacity: .7;
+}
+
+@media (max-width: 768px) {
+    .profile-card button {
+        padding: 3px 8px;
+        font-size: 14px; 
+    }
+}
+
+.control-panel {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 86%; 
+    height: 50px;
+    position: fixed; 
+    top: 40%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+
+#filterDropdown, #searchInput {
+    padding: 12px 15px;
+    border: none; 
+    border-radius: 30px; 
+    width: auto; 
+    flex-grow: 1; 
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); 
+    transition: box-shadow 0.3s ease, transform 0.3s ease; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin-right: 10px; 
+    outline: none; 
+    color: gray ; 
+}
+
+/* Style the dropdown arrow */
+#filterDropdown {
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none;
+}
+
+#filterDropdown:focus, #searchInput:focus {
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25); 
+}
+
+#filterDropdown:hover, #searchInput:hover,
+#filterDropdown:focus, #searchInput:focus {
+    box-shadow: 0 6px 6px rgba(50, 50, 93, 0.13), 0 3px 3px rgba(0, 0, 0, 0.11); 
+}
+
+@media (max-width: 768px) {
+    .control-panel {
+        flex-direction: row;
+        align-items: stretch; 
+    }
+
+    #filterDropdown, #searchInput {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Settings Container */
+.settings-container {
+    position: fixed; 
+    top: 0px; 
+    left: 680px; 
+
+    z-index: 1000; 
+}
+
+#filterDropdown {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.library-title h1 {
+    position: fixed;
+    top: 45px;
+    left: 120px;
+    font-size: 6em; 
+    font-family: 'Fredoka One', cursive; 
+    color: white;
+
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+    margin-bottom: 0.5em;
+}
+
+.library-title p {
+    position: fixed;
+    top: 160px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    font-size: 1.6em; 
+    font-family: 'Dancing Script', cursive;
+    color: white; 
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); 
+    max-width: 90%; 
+    text-align: center; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
