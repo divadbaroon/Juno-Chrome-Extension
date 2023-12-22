@@ -2,11 +2,13 @@ var currentDayBackgroundIndex = 0;
 var currentNightBackgroundIndex = 0;
 var timeOfDay = 'day';
 
+var dayBackgrounds = ['../../images/light/beatiful.png', '../../images/light/dawg.png', '../../images/light/dawg2.png'];
+var nightBackgrounds = ['../../images/dark/dark.png', '../../images/dark/dark1.png', '../../images/dark/dark3.png', 
+    '../../images/dark/abstract.png', '../../images/dark/abstract2.png', '../../images/dark/abstract3.png'];
+
 
 // changes background image
 function changeBackground() {
-    var dayBackgrounds = ['../images/day/clouds.png', '../images/day/wow.png', '../images/day/pretty_clouds.png'];
-    var nightBackgrounds = ['../images/night/night_sky.png', '../images/night/night_sky3.png', '../images/night/night_sky4.png', '../images/night/night_sky5.png'];
     
     if (timeOfDay == 'day') {
         currentDayBackgroundIndex = (currentDayBackgroundIndex + 1) % dayBackgrounds.length;

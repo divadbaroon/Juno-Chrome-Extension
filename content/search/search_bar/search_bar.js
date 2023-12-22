@@ -1,3 +1,5 @@
+sunImagePath = '../../images/sun3.png';
+moonImagePath = '../../images/moon2.png';
 
 document.addEventListener('DOMContentLoaded', function() {
     var searchButton = document.getElementById('searchButton');

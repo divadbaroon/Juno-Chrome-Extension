@@ -7,7 +7,7 @@ body {
     height: 700px;
     width: 700px; 
     background-color: #ffffff; 
-    background-image: url('../images/dawg.png');
+    background-image: url('../images/light/dawg.png');
     background-size: cover; 
     background-position: center; 
     background-repeat: repeat; 
@@ -31,7 +31,7 @@ body {
     text-align: center;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    margin-top: 460px; /* Adjust this value to move the box down */
+    margin-top: -70px; /* Adjust this value to move the box down */
     border-radius: 15px;
 }
 
@@ -120,4 +120,9 @@ body {
     .how-to-guide h2 {
         font-size: 1.75rem;
     }
+}
+
+.how-to-guide {
+    transition: all 0.3s ease;
+    /* Other existing styles */
 }

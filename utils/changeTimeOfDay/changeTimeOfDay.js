@@ -1,3 +1,5 @@
+sunImagePath = '../images/sun3.png';
+moonImagePath = '../images/moon2.png';
 
 document.addEventListener('DOMContentLoaded', function() {
     var changeTimeOfDay = document.getElementById('changeTimeOfDay');
@@ -7,11 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     changeTimeOfDay.addEventListener('click', function() {
         if (timeOfDay == 'day') {
             timeOfDay = 'night'
-            changeTimeOfDayIcon.src = "../images/moon2.png";
+            changeTimeOfDayIcon.src = moonImagePath;
         }
         else if (timeOfDay == 'night') {
             timeOfDay = 'day'
-            changeTimeOfDayIcon.src = "../images/sun3.png";
+            changeTimeOfDayIcon.src = sunImagePath;
         }
         changeBackground()
     });
