@@ -1,3 +1,5 @@
+
+
 document.getElementById('toggleGuideButton').addEventListener('click', function() {
     var guide = document.getElementById('how-to');
     if (guide.style.display === 'none') {

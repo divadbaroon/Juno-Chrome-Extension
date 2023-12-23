@@ -6,7 +6,7 @@ body {
     height: 700px;
     width: 700px; 
     background-color: #ffffff; 
-    background-image: url('../../images/light/dawg.png');
+    background-image: url('../../images/dark/dark.png');
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
@@ -22,18 +22,29 @@ body {
 .settings-container {
     position: fixed; 
     top: 0px; 
-    left: 680px; 
+    left: px; 
 
     z-index: 1000; 
 }
 
+#imageButton {
+    position: fixed; /* Fixed position relative to the viewport */
+    bottom: 10px;    /* 10px from the bottom */
+    top: 540px;
+    right: 0px;     /* 10px from the right */
+    border: none;    /* Removes the border */
+    outline: none;   /* Removes the outline */
+    background: none;/* Removes the default background */
+    cursor: pointer; /* Changes cursor on hover */
+}
+
 .engine-title h1 {
-    font-size: 8.5em; 
+    font-size: 8em; 
     font-family: 'Fredoka One', cursive; 
     color: white;
     text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
     text-align: center;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 
 .engine-title p {
@@ -45,6 +56,13 @@ body {
     margin-top: 5px; 
 
     margin-bottom: 10px; 
+}
+
+.settings-container {
+    position: fixed; /* or 'fixed' for a fixed position */
+    top: 0px;
+    right: 0px;
+    z-index: 1000; /* Ensure it's above other elements */
 }
 
 .search-container {

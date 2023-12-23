@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     color: #333; 
-    margin-top: -75px;
+    margin-top: -40px;
     padding: 20px;
     height: 700px;
     width: 700px; 
@@ -29,7 +29,7 @@ body {
     max-width: 1200px;
     margin: auto;
     padding: 20px;
-    padding-top: 1220px; 
+    padding-top: 1155px; 
 
 }
 
@@ -41,17 +41,17 @@ body {
 
 .profile-card {
     position: relative; 
-    width: calc(33.333% - 20px);
+    width: calc(25% - 20px);
     margin: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden; 
-    background-color: #ffffff;
+    background: none;
     text-align: center;
 }
 .profile-card {
-    cursor: pointer; 
-    transition: box-shadow 0.3s ease, transform 0.3s ease; 
+    padding-top: -550px; /* Added padding at the top */
+
 }
 
 .profile-card:hover {
@@ -78,6 +78,7 @@ body {
 @media (max-width: 768px) {
     .profile-card {
         width: 200px; 
+        
     }
 }
 
@@ -113,6 +114,7 @@ body {
     cursor: pointer;
     left: -10px;
     top: -10px;
+    opacity: .8;
 } 
 
 .top-right-button {
@@ -123,6 +125,7 @@ body {
     cursor: pointer;
     left: 153px;
     top: 0px;
+    opacity: .6;
 }
 
 /* Styling for the button images */
@@ -158,7 +161,7 @@ body {
     width: 86%; 
     height: 50px;
     position: fixed; 
-    top: 40%; 
+    top: 38%;
     left: 50%; 
     transform: translate(-50%, -50%); 
 }
@@ -221,7 +224,7 @@ body {
 
 .library-title h1 {
     position: fixed;
-    top: 45px;
+    top: 29px;
     left: 120px;
     font-size: 6em; 
     font-family: 'Fredoka One', cursive; 
@@ -233,7 +236,7 @@ body {
 
 .library-title p {
     position: fixed;
-    top: 160px; 
+    top: 146px; 
     left: 50%; 
     transform: translateX(-50%); 
     font-size: 1.6em; 
