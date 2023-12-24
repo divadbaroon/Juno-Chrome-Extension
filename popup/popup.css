@@ -7,7 +7,7 @@ body {
     height: 700px;
     width: 700px; 
  
-    background-image: url('../images/bb.png');
+    background-image: url('../images/light/dawg.png');
     background-size: cover; 
     background-position: center; 
     background-repeat: repeat; 
@@ -18,30 +18,33 @@ body {
     align-items: center; 
 }
 
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Settings Container */
 .settings-container {
-    position: fixed; /* or 'fixed' for a fixed position */
+    position: fixed; 
     top: 0px;
     right: 0px;
-    z-index: 1000; /* Ensure it's above other elements */
+    z-index: 1000; 
 }
 
 .hero-section {
-    /* Regular text styling */
-    font-size: 16px; /* Adjust as needed */
-    color: #333; /* Adjust as needed */
-    /* Other styling as per your requirement */
+    font-size: 16px; 
+    color: #333; 
     width: 100%;
     margin-top: 50px;
 
-    /* Flexbox properties */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* Class to hide text */
 .hidden-text {
     display: none;
 }
@@ -51,48 +54,18 @@ body {
     font-size: 130px; 
     color: white; 
     margin: 0px;
-    margin-bottom: 200px; /* Adjust this value to raise the title */
+    margin-bottom: -20px; 
     text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 
 .tagline {
     font-size: 1.4rem;
     margin: 20px 0;
-    margin-bottom: 200px; /* Adjust this value to raise the subtitle */
+    margin-bottom: 200px; 
     color: #555;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 
 }
-
-.cta-button {
-    display: inline-block;
-    padding: 10px 30px;
-    margin-top: 20px;
-    background-color: rgb(0, 164, 229);
-    color: white;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 10px 30px;
-    margin-top: 20px;
-    background-color: rgb(0, 164, 229);
-    color: white;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.cta-button:hover {
-    background-color: rgb(0, 164, 229);
-    transform: scale(1.05);
-}
-
 
 .how-to-guide {
     max-width: 1000px;
@@ -118,6 +91,10 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
     border-radius: 10px;
+    width: 100%;
+    height: 60vh;
+    box-sizing: border-box;
+    
 }
 
 .guide-item:hover {
@@ -135,9 +112,6 @@ body {
     color: #555;
 }
 
-
-
-/* Responsive design, typography adjustments, etc. */
 @media (max-width: 768px) {
     .hero-section {
         padding: 30px 15px;
@@ -154,5 +128,327 @@ body {
 
 .how-to-guide {
     transition: all 0.3s ease;
-    /* Other existing styles */
 }
+
+.centered-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto; 
+    margin-top: -220px; 
+    width: 100%; 
+}
+
+.centered-image img {
+    max-width: 100%; 
+    height: auto;
+}
+
+.hub-container {
+    display: block; 
+    max-width: 80%; 
+    margin: 20px auto; 
+    background-color: transparent; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+    border-radius: 10px; 
+    padding: 30px; 
+    text-align: center; 
+    position: relative;
+    top: -60px; 
+}
+
+.hub-container h1 {
+    font-size: 28px; 
+    color: #333; 
+    margin-bottom: 15px; 
+    padding-bottom: 5px; 
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Styling for the section titles */
+.profile-section h2, .extension-section h2 {
+    font-size: 22px; 
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 500; 
+    font-family: 'Roboto', sans-serif;
+}
+
+.inner-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; 
+}
+
+.profile-section, .extension-section {
+    flex: 1; 
+    background-color: #f7f7f7; 
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6; 
+    width: 45%; 
+    background-color: transparent;
+    box-shadow: none; 
+    border: none; 
+
+}
+
+.profile-info, .extension-info {
+    padding: 10px;
+    background-color: #ffffff; 
+    border-radius: 5px; 
+    margin-top: 10px; 
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    background-color: transparent;
+    box-shadow: none; 
+    border: none; 
+}
+
+.profile-card {
+    width: 100%; 
+    max-width: 300px; 
+    margin: 0 auto; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden; 
+    background-color: #ffffff;
+    padding: 15px;
+    position: relative; 
+    left: -15px; 
+    height: 50%;
+}
+
+.profile-card img {
+    width: 80%;  
+    object-fit: cover; 
+    height: 100%; 
+}
+
+
+.top-left-button, .top-right-button 
+{
+    display: none; 
+}
+
+#toggleHubButton {
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.3s; 
+    outline: none; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+    margin-top: 30px; 
+}
+
+#toggleHubButton:hover {
+    background-color: #0056b3; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+#toggleHubButton:focus {
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); 
+}
+
+
+.hub-container h1, .profile-section h2, .extension-section h2 {
+    text-align: center; 
+    margin: 0; 
+    padding: 10px 0; 
+}
+
+.profile-card:hover {
+    box-shadow: 0 0 25px 10px rgba(173, 216, 230, 1); 
+    transform: scale(1.02); 
+}
+
+.extension-search-dropdown {
+    position: relative;
+}
+
+#extensionSearchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    z-index: 2000;
+    width: calc(100% - 2px); 
+    display: none; 
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee; 
+    background-color: #fafafa; 
+}
+
+.dropdown-content div:hover {
+    background-color: #f0f0f0;
+}
+
+.selected-items .selected-item {
+    background-color: #e0e0e0; 
+    border: 1px solid #ccc; 
+}
+
+.selected-items .selected-item span {
+    font-weight: bold;
+    margin-left: 8px;
+    color: #ff0000; 
+}
+
+.selected-extensions {
+    margin-top: 20px;
+}
+
+.selected-extension {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+}
+
+.remove-extension {
+    cursor: pointer;
+    margin-left: 5px;
+    color: #999;
+}
+
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+#searchExtensions {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#searchInput {
+    width: 100px; 
+    height: 30px; 
+
+    font-size: 12px; 
+    border-radius: 15px; 
+    border: 1px solid #ccc; 
+    background-color: #f8f8f8; 
+    padding: 5px 10px; 
+
+    transition: all 0.3s ease;
+}
+
+#searchInput:hover {
+    background-color: #e7e7e7;
+    border-color: #bbb;
+}
+
+
+.dropdown-list {
+    display: none; 
+    position: absolute;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-top: none; 
+    z-index: 10;
+    max-height: 200px; 
+    overflow-y: auto; 
+    background: #fff;
+    border-radius: 0 0 5px 5px; 
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.dropdown-list div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd; 
+}
+
+.dropdown-list div:hover {
+    background-color: #f6f6f6;
+}
+
+.selected-items {
+    margin-top: 10px;
+}
+
+.selected-item {
+    display: inline-block;
+    background-color: #e4e4e4;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.selected-item span {
+    margin-left: 10px;
+    cursor: pointer;
+    color: red;
+}
+
+.extension-interaction {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute; 
+    left: 50%;
+    bottom: -190px;
+    transform: translateX(-50%); 
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    z-index: 1000; 
+    width: auto; 
+}
+
+.extension-interaction p {
+    margin: 0 10px 0 0;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+#keyboardShortcut {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    width: 150px; 
+}
+
+/* Enhancing the input field appearance */
+#keyboardShortcut:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Adding a subtle transition effect */
+#keyboardShortcut, .extension-interaction {
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+
+

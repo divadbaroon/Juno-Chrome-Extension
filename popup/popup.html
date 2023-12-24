@@ -2,6 +2,8 @@
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 
     <title>Juno</title>
     
@@ -34,35 +36,53 @@
 
         </div>
 
-        <header class="hero-section">
-            <h1 class="juno-title">Juno</h1>
-            <p class="tagline">Customize, Create, and Interact with Intelligent Agents</p>
-            <button id="toggleGuideButton" class="cta-button">Get Started</button>
+        <div class="centered-image">
+            <img src="../images/junoim.png" alt="Descriptive text">
+        </div>
 
-        </header>
-    
-        <main id="how-to" class="how-to-guide" style="display: none;">
-            <h2>How to Get Started</h2>
-            <div class="guide-sections">
-                <section class="guide-item">
-                    <h3>Profiles</h3>
-                    <p>Manage and customize your intelligent agents' profiles to best suit your needs.</p>
-                </section>
-                <section class="guide-item">
-                    <h3>Extensions</h3>
-                    <p>Enhance the capabilities of your agents with powerful extensions.</p>
-                </section>
-                <section class="guide-item">
-                    <h3>Search</h3>
-                    <p>Utilize advanced search tools to find the perfect agent for your tasks.</p>
-                </section>
-                <section class="guide-item">
-                    <h3>Usage</h3>
-                    <p>Discover the best practices for interacting with and utilizing your agents.</p>
-                </section>
+        <button id="toggleHubButton">Get Started</button>
+
+        <div class="hub-container">
+            <h1>Customize your entity</h1>
+            <div class="inner-container">
+                <div class="profile-section">
+                    <h2>Profile</h2>
+                    <div class="profile-info">
+                        <!-- Dynamic content for profile -->
+                        <div class="profile-card">
+                            <button class="top-left-button"><img src="../../images/profiles/bookmark.png" alt="Icon 1"></button>
+                            <button class="top-right-button"><img src="../../images/profiles/add2.png" alt="Icon 2"></button>
+                            <img src="../../images/profiles/Scientist4.png" alt="Profile 2">
+                            <h3>Charles</h3>
+                            <p>Analytical mind, excels in scientific reasoning and problem-solving, ideal for knowledge-seeking conversations.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="extension-section">
+                    <h2>Extensions</h2>
+                    <div class="extension-search-dropdown">
+                        <input type="text" id="searchInput" placeholder="Search...">
+                        <div id="dropdownContent" class="dropdown-content"></div>
+
+                        </div>
+                        <div class="selected-items">
+                            <!-- Selected items will be displayed here -->
+                        </div>
+                        
+                    </div>
+                    <div id="selectedExtensions" class="selected-extensions">
+                        <!-- Selected extensions will appear here -->
+                    </div>
+                </div>
+                
             </div>
-        </main>
-
+        </div>
+        
+        <div class="extension-interaction">
+            <p>To interact, use the extension:</p>
+            <input type="text" id="keyboardShortcut" placeholder="Enter keyboard extension" value="Ctrl + Tab">
+        </div>
+        
         <!-- Button to change the time of day -->
         <button id="changeTimeOfDay" class="changeTimeOfDay-icon">
             <img src="../images/sun3.png" alt="Settings" />
