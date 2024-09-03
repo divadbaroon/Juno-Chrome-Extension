@@ -1,0 +1,54 @@
+{
+    "manifest_version": 3,
+    "name": "Juno",
+    "version": "1.0.0",
+    "icons": {
+        "16": "./juno-icon16.png",
+        "64": "./juno-icon64.png",
+        "128": "./juno-icon128.png"
+    },
+
+    "action": {
+        "default_popup": "index.html"
+    },
+
+    
+    "background": { 
+        "service_worker": "background.js",
+        "type": "module"
+    },
+
+    "content_scripts": [{
+        "js": ["content.js"],
+        "matches": ["<all_urls>"],
+        "all_frames": true
+    }],
+
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "commands",
+        "storage",
+        "identity",
+        "tabs"
+    ],
+
+    "host_permissions": [
+        "<all_urls>"
+    ],
+
+    "commands": {
+        "BeginInteraction": {
+        "suggested_key": {
+            "default": "Ctrl+Shift+S",
+            "mac": "Command+Shift+S"
+            },
+        "description": "Initiate interaction",
+        "global": true
+        }   
+    },
+
+    "externally_connectable": {
+        "matches": ["<all_urls>"]
+    }
+}
