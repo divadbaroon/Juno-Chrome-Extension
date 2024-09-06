@@ -1,29 +1,20 @@
 import { ConversationAnalysisClient, ConversationalTask } from "@azure/ai-language-conversations";
 import { AzureKeyCredential } from "@azure/core-auth";
 
-interface Entity {
-  text: string;
-  category: string;
-  confidenceScore: number;
-}
+import { IntentResult, Secrets } from '../../types'
 
-interface IntentResult {
-  intent: string;
-  confidence: number;
-  topEntity?: Entity;
-}
+/*
+Takes the user's input and performs intent recognition on it using Azure CLU
+*/
+export async function recognizeIntent(text: string, secrets: Secrets): Promise<IntentResult> {
 
-export async function recognizeIntent(text: string): Promise<IntentResult> {
-  const cluEndpoint = "https://eastus.api.cognitive.microsoft.com/";
-  const cluKey = "5f6de410d51045f2bad26341fac632ea";
-  const projectName = "Juno";
-  const deploymentName = "Juno2";
-
+  // Authentication
   const client = new ConversationAnalysisClient(
-    cluEndpoint,
-    new AzureKeyCredential(cluKey)
+    secrets.AzureCLUEndpoint,
+    new AzureKeyCredential(secrets.AzureCLUKey)
   );
 
+  // Prepare body to be sent to Azure CLU
   const body: ConversationalTask = {
     kind: "Conversation",
     analysisInput: {
@@ -34,24 +25,30 @@ export async function recognizeIntent(text: string): Promise<IntentResult> {
       },
     },
     parameters: {
-      projectName: projectName,
-      deploymentName: deploymentName,
+      projectName: secrets.AzureCLUProjectName,
+      deploymentName: "Juno5",
       stringIndexType: "TextElement_V8"
     },
   };
 
   try {
+    // Recieve result from Azure CLU
     const { result } = await client.analyzeConversation(body);
 
+    // If a result was recieved, extract the results
     if (result.prediction.projectKind === "Conversation" && result.prediction.intents.length > 0) {
+      // Extract top intent information
       const topIntent = result.prediction.intents[0];
+      // Extract top entity if it exists
       let topEntity = result.prediction.entities?.[0];
 
+      // Extract top intent and confidence level
       const intentResult: IntentResult = {
         intent: topIntent.category,
         confidence: topIntent.confidence,
       };
 
+      // If top entity was also recieved, add it to the intentResult object
       if (topEntity) {
         intentResult.topEntity = {
           text: topEntity.text,
@@ -69,17 +66,3 @@ export async function recognizeIntent(text: string): Promise<IntentResult> {
     throw error;
   }
 }
-
-// Message listener
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-  if (message.action === "recognizeIntent" && message.text) {
-    recognizeIntent(message.text)
-      .then(result => {
-        sendResponse({ success: true, result: result });
-      })
-      .catch(error => {
-        sendResponse({ success: false, error: error.message });
-      });
-    return true;  
-  }
-});
