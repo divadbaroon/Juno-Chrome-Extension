@@ -15,30 +15,7 @@ import {
 } from '../../../../shadcn/components/dialog';
 import DetailsSection from './DetailsSection';
 
-interface DisplayCardProps {
-  clerkId: string; // Clerk ID of the user viewing the card
-  contextType: string;
-  type: string;
-  title: string;
-  creator: string;
-  blobURL?: string;
-  link?: string;
-  description: string;
-  photo?: string;
-  isSelected: boolean;
-  onSelect: () => void;
-  userCollection: {
-    profiles: string[];
-    llms: string[];
-    voices: string[];
-    extensions: string[];
-  };
-  isInCollection: boolean;
-  additionalInfo?: string;
-  onReload: () => void;
-  models: string[];
-  allItems: any;
-}
+import { DisplayCardProps } from '../../../../types'
 
 const DisplayCard: React.FC<DisplayCardProps> = ({
   contextType,

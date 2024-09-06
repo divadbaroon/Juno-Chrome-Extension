@@ -7,26 +7,7 @@ import {
 } from "../../../../shadcn/components/carousel";
 import DisplayCard from './DisplayCard';
 
-interface CarouselProps {
-  profiles: Profile[];
-  selectedProfile: Profile | null;
-  userDetails: UserDetails;
-  handleProfileSelection: (profile: Profile) => void;
-  isCardInCollection: (id: string) => boolean;
-  onReload: () => void;
-}
-
-import { Profile } from "../../../../types"
-
-interface UserDetails {
-    clerkId: string;
-    userCollection: {
-        profiles: string[];
-        llms: string[];
-        voices: string[];
-        extensions: string[];
-    };
-}
+import { CarouselProps } from "../../../../types"
 
 export function ProfileCarousel({
   profiles,

@@ -1,15 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
 
-import { Profile } from "../../../../types"
-
-interface User {
-  _id: string;
-  clerkId: string;
-  userCollection: {
-    profiles: string[];
-  };
-}
+import { Profile, User } from "../../../../types"
 
 function ProfileList() {
   const [_profiles, setProfiles] = useState<Profile[]>([]);
@@ -17,7 +9,9 @@ function ProfileList() {
 
   useEffect(() => {
     const fetchUserAndProfiles = async () => {
-      if (!user) return; // Exit early if user is not available
+
+      // check if user is found
+      if (!user) return; 
 
       try {
         // Fetch user data
@@ -46,9 +40,9 @@ function ProfileList() {
     };
 
     fetchUserAndProfiles();
-  }, [user]); // Dependency on user ensures this runs when the user is loaded
+  }, [user]); 
 
-  return null; // Component doesn't render anything visible
+  return null; 
 }
 
 export default ProfileList;
