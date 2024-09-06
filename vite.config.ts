@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { resolve } from 'path';
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,7 +11,8 @@ export default defineConfig({
       input: {
         background: 'src/background.ts',
         content: 'src/content.ts',
-        popup: 'index.html',  
+        popup: 'index.html',
+        ui: resolve(__dirname, 'src/extensions/content/showUI/ChatInterface.tsx'  ),
       },
       output: {
         entryFileNames: (chunkInfo) => {
@@ -18,6 +21,9 @@ export default defineConfig({
           }
           if (chunkInfo.name === 'content') {
             return 'content.js';
+          }
+          if (chunkInfo.name === 'ui') {
+            return 'ui.js';
           }
           return '[name]-[hash].js';
         },
