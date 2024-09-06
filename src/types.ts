@@ -142,8 +142,8 @@ export interface Data {
 export interface Entity {
   category: string;
   text: string;
-  offset: number;
-  length: number;
+  offset?: number;
+  length?: number;
   confidenceScore: number;
 }
 
@@ -157,4 +157,51 @@ export interface ExtensionResult {
   extensionResponse: string;
   queryLLM: boolean;
   fileURL?: string
+}
+
+export interface Message {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+}
+
+export interface CarouselProps {
+  profiles: Profile[];
+  selectedProfile: Profile | null;
+  userDetails: UserDetails;
+  handleProfileSelection: (profile: Profile) => void;
+  isCardInCollection: (id: string) => boolean;
+  onReload: () => void;
+}
+
+export interface DisplayCardProps {
+  clerkId: string; 
+  contextType: string;
+  type: string;
+  title: string;
+  creator: string;
+  blobURL?: string;
+  link?: string;
+  description: string;
+  photo?: string;
+  isSelected: boolean;
+  onSelect: () => void;
+  userCollection: {
+    profiles: string[];
+    llms: string[];
+    voices: string[];
+    extensions: string[];
+  };
+  isInCollection: boolean;
+  additionalInfo?: string;
+  onReload: () => void;
+  models: string[];
+  allItems: any;
+}
+
+export interface User {
+  _id: string;
+  clerkId: string;
+  userCollection: {
+    profiles: string[];
+  };
 }
