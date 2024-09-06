@@ -1,7 +1,12 @@
 import { OpenAIResponse } from '../../types';
 
+/*
+Queries the large language model using the user's speech and the user's currently selected prompt (from their currently selected profile)
+*/
 export async function generateResponse(usersSpeech: string, prompt: any, apiKey: string, additionalInformation?: string, fileURL?: string): Promise<string> {
   try {
+
+    // Prepare message to be sent to LLM
     let userMessage: any = {
       role: 'user',
       content: [
@@ -9,8 +14,7 @@ export async function generateResponse(usersSpeech: string, prompt: any, apiKey:
       ]
     };
 
-    console.log(fileURL)
-
+    // If a file was also recieved, add it
     if (fileURL) {
       userMessage.content.push({
         type: "image_url",
@@ -20,6 +24,7 @@ export async function generateResponse(usersSpeech: string, prompt: any, apiKey:
       });
     }
 
+    // Perform LLM query
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -55,6 +60,7 @@ export async function generateResponse(usersSpeech: string, prompt: any, apiKey:
     const llmData: OpenAIResponse = await response.json();
     console.log("OpenAI API Response:", JSON.stringify(llmData, null, 2));
 
+    // Get and return the response
     const content = llmData.choices[0].message.content;
     return content;
 

@@ -1,6 +1,8 @@
 import { ExtensionResult } from '../../../types'; 
 
-// Function to perform a YouTube search
+/*
+Youtube Extension: Perform's a given Youtube query
+*/
 export async function performYouTubeSearch(query: string): Promise<ExtensionResult> {
   const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
   await chrome.tabs.create({ url: searchUrl });

@@ -1,5 +1,9 @@
+// TODO: refactor this file-
+
+// Constants
 const codec = "audio/mpeg";
-const maxBufferDuration = 90;
+const maxBufferDuration = 90; // in seconds
+
 // @ts-ignore
 let streamingCompleted = true;
 let mediaSource: MediaSource;
@@ -7,6 +11,10 @@ let audioElement: HTMLAudioElement;
 let isStopped = false;
 let abortController: AbortController | null = null;
 
+/**
+ * Initializes the audio components for streaming.
+ * Resets the MediaSource, Audio element, and control flags.
+ */
 const initializeAudioComponents = () => {
   if (mediaSource && mediaSource.readyState === 'open') {
     mediaSource.endOfStream();
@@ -18,6 +26,9 @@ const initializeAudioComponents = () => {
   abortController = new AbortController();
 };
 
+/**
+ * Fetches audio stream from ElevenLabs API.
+ */
 async function fetchElevenLabsAudio(text: string, voiceID: string, apiKey: string, signal: AbortSignal): Promise<Response> {
   const response = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${voiceID}/stream`,
@@ -51,6 +62,9 @@ async function fetchElevenLabsAudio(text: string, voiceID: string, apiKey: strin
   return response;
 }
 
+/**
+ * Streams audio from ElevenLabs API and plays it.
+ */
 export const streamAudio = async (text: string, voiceID: string, apiKey: string) => {
   initializeAudioComponents();
 
@@ -135,6 +149,9 @@ export const streamAudio = async (text: string, voiceID: string, apiKey: string)
   });
 };
 
+/**
+ * Stops the current audio playback and streaming.
+ */
 export const stopAudio = () => {
   isStopped = true;
   if (abortController) {

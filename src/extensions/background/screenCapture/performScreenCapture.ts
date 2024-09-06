@@ -1,6 +1,8 @@
 import { ExtensionResult } from '../../../types';
 
-// Function to capture a screenshot
+/*
+ScreenCapture Extension: Capture's a screensot of the user's screen and automatically includes it as context to the LLM
+*/
 export async function captureScreenshot(): Promise<ExtensionResult> {
   try {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -28,7 +30,7 @@ export async function captureScreenshot(): Promise<ExtensionResult> {
     return {
       extensionResponse: "Screenshot captured",
       queryLLM: true,
-      fileURL: dataUrl  // We're now passing the data URL directly
+      fileURL: dataUrl  
     };
 
   } catch (error) {

@@ -2,7 +2,9 @@
 
 import { ExtensionResult } from "../../../types";
 
-// Function to get the currently highlighted text
+/*
+TextReader Extension: Get's the user's currently highlighted text and automatically includes it as context to the LLM
+*/
 export async function getSelectedText(): Promise<ExtensionResult> {
   const selection = window.getSelection();
   const selectedText = selection ? selection.toString() : "";
