@@ -21,7 +21,8 @@
     "content_scripts": [{
         "js": ["content.js"],
         "matches": ["<all_urls>"],
-        "all_frames": true
+        "all_frames": true,
+        "type": "module"
     }],
 
     "permissions": [
@@ -50,5 +51,12 @@
 
     "externally_connectable": {
         "matches": ["<all_urls>"]
+    },
+
+    "web_accessible_resources": [
+    {
+        "resources": ["content.js", "ui.js", "assets/*"],
+        "matches": ["<all_urls>"]
     }
+    ]
 }
