@@ -70,20 +70,13 @@ recieve user speech using Google Cloud Speech-to-Text -> Recieve user's intent b
 -> Execute extension (If applicable, this depends on the intent of the user) -> Query LLM using user's input and response from extension (if applicable)
 -> Finally perform Text-to-Speech on the LLM's response
 */
-async function produceResponse(speechRecognition: GoogleSpeechRecognition, secrets: Secrets, voiceId: string, prompt: Prompt, guiInput?: string) {
+async function produceResponse(speechRecognition: GoogleSpeechRecognition, secrets: Secrets, voiceId: string, prompt: Prompt) {
   try {
-    let userInput: string;
 
-    // if user input is coming from GUI use that instead of speech recognition result
-    if (guiInput) {
-        userInput = guiInput;
-        console.log('User GUI input:', userInput);
-    } else {
-        // get user's speech using Google Cloud Speech-to-Text
-        const result = await speechRecognition.stopListening();
-        userInput = result.results[0].alternatives[0].transcript;
-        console.log('User speech:', userInput);
-    }
+    // get user's speech using Google Cloud Speech-to-Text
+    const result = await speechRecognition.stopListening();
+    const userInput = result.results[0].alternatives[0].transcript;
+    console.log('User speech:', userInput);
 
     let response = '';
     let extensionResult: ExtensionResult | null = null;
@@ -92,7 +85,7 @@ async function produceResponse(speechRecognition: GoogleSpeechRecognition, secre
     if (userInput) {
         try {
             let intentRecognized = await requestIntentRecognition(userInput, secrets);
-            console.log(intentRecognized);
+            console.log('Intent recognized:', intentRecognized);
             
             // if the confidence level for the detected intent is higher than 85% , call the extension
             // (Will adjust this in the future to be much higher, this will require more time improving training data for model)
@@ -106,7 +99,6 @@ async function produceResponse(speechRecognition: GoogleSpeechRecognition, secre
 
       // If a response if recieved from the extension, it will be used as context to the LLM or solely used as the response if queryLLM is set to False
       if (extensionResult && extensionResult.extensionResponse != 'ignore') {
-        console.log("EXTENSION RESULT:", extensionResult.extensionResponse, extensionResult.queryLLM, extensionResult.fileURL);
 
         if (extensionResult.queryLLM) {
 
@@ -114,8 +106,6 @@ async function produceResponse(speechRecognition: GoogleSpeechRecognition, secre
           if (extensionResult.extensionResponse) {
             sustainedAdditonalInformation = extensionResult.extensionResponse
           }
-
-          console.log("AdditionalInformation" + sustainedAdditonalInformation)
 
           // Query LLM with extension result as additional context
           const llmResponse = await requestLLMResponse(
@@ -140,10 +130,9 @@ async function produceResponse(speechRecognition: GoogleSpeechRecognition, secre
 
       // If a response is recieved, perform text-to-speech on it using Elevenlabs
       if (response) {
-        console.log('Response:', response);
-        if (!guiInput) {
-          await streamAudio(response, voiceId, secrets.Elevenlabs);
-        }
+        console.log("LLM's response:", response);
+        await streamAudio(response, voiceId, secrets.Elevenlabs);
+
       } else {
         console.error('No response generated');
       }
@@ -153,9 +142,7 @@ async function produceResponse(speechRecognition: GoogleSpeechRecognition, secre
     } catch (error) {
       console.error('Error in stopInteraction:', error);
     } finally {
-      if (!guiInput) {
-        speechRecognition = null;
-      }
+      speechRecognition = null;
     } 
 }
 
