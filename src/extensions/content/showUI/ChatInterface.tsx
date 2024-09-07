@@ -1,8 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
 import ReactDOM from 'react-dom/client';
-import { Input } from "../../../shadcn/components/input"
-import { Button } from "../../../shadcn/components/button"
-import { Send } from "lucide-react"
 
 type Message = {
   id: number;
@@ -12,9 +9,11 @@ type Message = {
 
 function SimpleChat() {
   const [messages, setMessages] = useState<Message[]>([
-    { id: 1, text: "Hello! How can I assist you today?", sender: 'ai' },
+    { id: 1, text: "Send a message to your currently selected profile!", sender: 'ai' },
   ]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [profileName, setProfileName] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -23,69 +22,75 @@ function SimpleChat() {
 
   useEffect(scrollToBottom, [messages]);
 
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.source === window && event.data && event.data.type === 'FROM_CONTENT') {
+        if (event.data.action === 'GUI_RESPONSE') {
+          if (event.data.error) {
+            setMessages(prev => [...prev, { 
+              id: prev.length + 1, 
+              text: `Error: ${event.data.error}`, 
+              sender: 'ai',
+              profileName: event.data.profileName 
+            }]);
+          } else {
+            setMessages(prev => [...prev, { 
+              id: prev.length + 1, 
+              text: event.data.response, 
+              sender: 'ai',
+              profileName: event.data.profileName 
+            }]);
+          }
+          setProfileName(event.data.profileName || null);
+          setIsLoading(false);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
   const handleSend = () => {
     if (input.trim()) {
       const newMessage: Message = { id: messages.length + 1, text: input, sender: 'user' };
-      setMessages([...messages, newMessage]);
+      setMessages(prev => [...prev, newMessage]);
+      setIsLoading(true);
+      
+      // Send message to content script
+      window.postMessage({ type: 'FROM_REACT', action: 'GET_GUI_RESPONSE', input }, '*');
+      
       setInput('');
-      // Simulate AI response
-      setTimeout(() => {
-        const aiResponse: Message = { id: messages.length + 2, text: "I'm an AI assistant. How can I help you?", sender: 'ai' };
-        setMessages(prevMessages => [...prevMessages, aiResponse]);
-      }, 1000);
     }
   }
 
   return (
-    <div style={{
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    }}>
-      <div style={{padding: '20px', borderBottom: '1px solid #eee'}}>
-        <h2>Chat Interface</h2>
-      </div>
-      <div style={{flex: 1, overflowY: 'auto', padding: '20px'}}>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <h2>Chat Interface {profileName ? `- ${profileName}` : ''}</h2>
+      <div className="messages-container">
         {messages.map((message) => (
-          <div 
-            key={message.id} 
-            style={{
-              display: 'flex',
-              justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
-              marginBottom: '10px'
-            }}
-          >
-            <div 
-              style={{
-                maxWidth: '70%',
-                padding: '10px',
-                borderRadius: '8px',
-                backgroundColor: message.sender === 'user' ? '#007bff' : '#f0f0f0',
-                color: message.sender === 'user' ? 'white' : 'black'
-              }}
-            >
+          <div key={message.id} className={`message-container ${message.sender}`}>
+            <div className={`message ${message.sender}`}>
               {message.text}
             </div>
           </div>
         ))}
         <div ref={messagesEndRef} />
       </div>
-      <div style={{padding: '20px', borderTop: '1px solid #eee'}}>
-        <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex w-full space-x-2">
-          <Input
+      <div className="input-container">
+        <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} style={{ display: 'flex', gap: '10px' }}>
+          <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="flex-grow"
+            disabled={isLoading}
           />
-          <Button type="submit" size="icon">
-            <Send className="h-4 w-4" />
-            <span className="sr-only">Send</span>
-          </Button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Sending...' : 'Send'}
+          </button>
         </form>
       </div>
     </div>
