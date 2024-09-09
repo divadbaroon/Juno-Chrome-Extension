@@ -1,150 +1,97 @@
+import { Engine } from './Engine';
+import { ShortcutManager } from '../functions/shortcutListener/ShortCutManager';
+import { requestInitialData } from '../fileCommunication/messengers';
 
-// Used to listen for the user's key strokes
-// If the user presses and holds their deignated shortcut, interaction with Juno begins
-import { initializeShortcutListener } from '../functions/shortcutListener/listenForShortcut';
+/**
+ * Manages to overall coordination of the engine and shortcut manager
+ * 
+ * Specifically: 
+ * The engine and shortcut listener to beigin listening for the user's keystrokes.
+ * If the user hold's their assigned shortcut, the engine is initiated
+ */
+export class Orchestrator {
+    private engine: Engine;
+    private shortcutManager!: ShortcutManager;
 
-// Used for speech recognition
-// @ts-ignore
-import { GoogleSpeechRecognition } from 'google-cloud-speech-webaudio';
+    constructor() {
+        this.engine = new Engine();
+    }
 
-import { requestInitialData, // Used to initialize necessary user data such as designated shortcut, secrets, voiceID, etc
-         requestIntentRecognition, // Used to perform intent recognition on user's speech
-         requestLLMResponse, // Queries the user's selected large langauge model
-        } from '../fileCommunication/messengers' // Used to send message to background script to execute these functions
-
-// Used to handle call to extensions, depending on the user's intent
-import { handleExtensionCalls } from '../functions/callExtension/handleExtensionCalls';
-
-// Stream's audio for text-to-speech using Elevenlabs
-import { streamAudio } from '../functions/textToSpeech/performTextToSpeech';
-
-import { Secrets, Prompt, ExtensionResult } from '../types';
-
-// Saving additional information globally 
-// Additional information is information returned from extensions (such content from the user's screen)
-let sustainedAdditonalInformation = ''
-
-/* 
-Initializes necessary user data including their selected shortcut (for interaction with Juno), 
-secrets (API keys and end points), voiceID (for text-to-speech), and prompt (prompt used to query LLM)
-*/
-async function initialize() {
-  let speechRecognition: GoogleSpeechRecognition | null = null;
-  const data = await requestInitialData();
-  if (data) {
-    speechRecognition = new GoogleSpeechRecognition(data.secrets.GoogleSpeechAPI, data.secrets.GoogleSpeechEndpoint);
-    initializeShortcutListener(
-      speechRecognition,
-      data.shortcut,
-      data.secrets,
-      data.voice.voiceId,
-      data.prompt,
-      startInteraction,
-      produceResponse
-    );
-    console.log("Initial shortcut loaded:", data.shortcut);
-  } else {
-    console.error("Failed to load initial data");
-  }
-}
-
-/*
-Begins listening for user input upon the user pressing their assigned shortcut
-*/
-async function startInteraction(speechRecognition: GoogleSpeechRecognition) {
-  try {
-    console.log('Listening...')
-    await speechRecognition.startListening();
-  } catch (error) {
-    console.error('Error starting speech recognition:', error);
-    speechRecognition = null;
-  }
-}
-
-/*
-Processes and produces a response to the users input
-
-Using the following workflow:
-
-recieve user speech using Google Cloud Speech-to-Text -> Recieve user's intent by quering Azure's CLU intent recognition using user's speech
--> Execute extension (If applicable, this depends on the intent of the user) -> Query LLM using user's input and response from extension (if applicable)
--> Finally perform Text-to-Speech on the LLM's response
-*/
-async function produceResponse(speechRecognition: GoogleSpeechRecognition, secrets: Secrets, voiceId: string, prompt: Prompt) {
-  try {
-
-    // get user's speech using Google Cloud Speech-to-Text
-    const result = await speechRecognition.stopListening();
-    const userInput = result.results[0].alternatives[0].transcript;
-    console.log('User speech:', userInput);
-
-    let response = '';
-    let extensionResult: ExtensionResult | null = null;
-
-    // If the user's input is detected, perform intent recognition on it
-    if (userInput) {
+    /**
+     * Initializes the engine and shortcut listener and begin listening for 
+     * the user's key strokes
+     */
+    async initialize() {
         try {
-            let intentRecognized = await requestIntentRecognition(userInput, secrets);
-            console.log('Intent recognized:', intentRecognized);
-            
-            // if the confidence level for the detected intent is higher than 85% , call the extension
-            // (Will adjust this in the future to be much higher, this will require more time improving training data for model)
-            if (intentRecognized.confidence > 0.85) {
-                extensionResult = await handleExtensionCalls(intentRecognized);
+            // Initialize the engine
+            await this.engine.initialize();
+
+            // Get initial data for shortcut setup
+            const initialData = await requestInitialData();
+
+            if (!initialData) {
+                throw new Error("Failed to load initial data");
             }
-        } catch (intentError) {
-            console.error('Error during intent recognition:', intentError);
+
+            // Create ShortcutManager
+            this.shortcutManager = new ShortcutManager(
+                initialData.shortcut,
+                this.handleListenCommand.bind(this),
+                this.handleProduceResponseCommand.bind(this)
+            );
+
+            // Start listening for shortcuts
+            this.shortcutManager.startListening();
+
+            console.log("Orchestrator initialized successfully");
+        } catch (error) {
+            console.error("Failed to initialize Orchestrator:", error);
+            throw error;
         }
     }
 
-      // If a response if recieved from the extension, it will be used as context to the LLM or solely used as the response if queryLLM is set to False
-      if (extensionResult && extensionResult.extensionResponse != 'ignore') {
-
-        if (extensionResult.queryLLM) {
-
-          // if new additional information is recieved, save it 
-          if (extensionResult.extensionResponse) {
-            sustainedAdditonalInformation = extensionResult.extensionResponse
-          }
-
-          // Query LLM with extension result as additional context
-          const llmResponse = await requestLLMResponse(
-            userInput, 
-            prompt, 
-            secrets.OpenAI, 
-            sustainedAdditonalInformation ,
-            extensionResult.fileURL
-          );
-          response = llmResponse.response || '';
-        } else {
-          // if queryLLM is set to False, use the extensions response as the response
-          response = extensionResult.extensionResponse;
+    /**
+     * Begins listening for the user's input via their microphone
+     */
+    private async handleListenCommand() {
+        try {
+            await this.engine.listen();
+        } catch (error) {
+            console.error("Error in listen command:", error);
         }
-      }
+    }
 
-      // If no response from extension, query LLM without additional context
-      if (!response && extensionResult?.extensionResponse != 'ignore') {
-        const llmResponse = await requestLLMResponse(userInput, prompt, secrets.OpenAI, sustainedAdditonalInformation);
-        response = llmResponse.response || '';
-      }
+     /**
+     * Produces a response using the user's input as context
+     */
+    private async handleProduceResponseCommand() {
+        try {
+            await this.engine.produceResponse();
+        } catch (error) {
+            console.error("Error in produce response command:", error);
+            // TODO: Handle error (say something to user)
+        }
+    }
 
-      // If a response is recieved, perform text-to-speech on it using Elevenlabs
-      if (response) {
-        console.log("LLM's response:", response);
-        await streamAudio(response, voiceId, secrets.Elevenlabs);
+    /**
+     * Updates the user's key strokes
+     */
+    public updateShortcut(newShortcut: string) {
+        this.shortcutManager.updateShortcut(newShortcut);
+    }
 
-      } else {
-        console.error('No response generated');
-      }
+    /**
+     * Stop listening for the user's assigned shortcut
+     */
+    public stopListening() {
+        this.shortcutManager.stopListening();
+    }
 
-      return response;
+    /**
+     * Start listening for the user's assigned shortcut
+     */
+    public startListening() {
+        this.shortcutManager.startListening();
+    }
 
-    } catch (error) {
-      console.error('Error in stopInteraction:', error);
-    } finally {
-      speechRecognition = null;
-    } 
 }
-
-
-initialize();
