@@ -3,9 +3,9 @@
     "name": "Juno",
     "version": "1.0.0",
     "icons": {
-        "16": "./juno-icon16.png",
-        "64": "./juno-icon64.png",
-        "128": "./juno-icon128.png"
+        "16": "./juno-icon-16.png",
+        "64": "./juno-icon-64.png",
+        "128": "./juno-icon-128.png"
     },
 
     "action": {
