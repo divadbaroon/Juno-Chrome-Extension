@@ -4,7 +4,7 @@ export const containerStyle = `
   right: 20px !important;
   z-index: 2147483647 !important;
   width: 350px !important;
-  height: 400px !important; 
+  height: 500px !important; 
   background-color: white !important;
   border-radius: 8px !important;
   overflow: hidden !important;
