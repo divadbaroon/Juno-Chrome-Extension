@@ -1,11 +1,31 @@
-/* 
-Orchestrates the interaction with Juno.
+import { Orchestrator } from './orchestrator/Orchestrator';
+import "./functions/guiResponse/handleGUIResponse";
 
-which includes the following functions:
+let orchestrator: Orchestrator | null = null;
 
-Speech recognition -> intent recognition -> call extension (if applicable) -> LLM interaction -> Text-to-Speech
+/**
+ * Initializes the orchestrator, which manages the overall 
+ * coordination of Juno's engine and shortcut manager
 */
-import "./orchestrator/orchestrator"
+async function initializeJuno() {
+    try {
+        orchestrator = new Orchestrator();
+        await orchestrator.initialize();
+        console.log("Juno initialized and ready to use!");
+    } catch (error) {
+        console.error("Failed to initialize Juno:", error);
+    }
+}
 
-import "./functions/guiResponse/handleGUIResponse"
+// Function to handle page reloads or navigation
+// @ts-ignore
+function handleNavigation() {
+    if (orchestrator) {
+        orchestrator.stopListening();
+        orchestrator = null;
+    }
+    initializeJuno();
+}
 
+// Initial setup
+initializeJuno();
