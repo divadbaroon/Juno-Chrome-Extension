@@ -34,7 +34,7 @@ export async function performYoutubeQA(): Promise<ExtensionResult> {
         const fullTranscript = transcriptData.map(segment => segment.text).join(' ');
         
         return {
-            extensionResponse: "The Youtube video's transript: " + fullTranscript,
+            extensionResponse: "When referring transcripts, provide direct quotes and statements. The Youtube video's transript: " + fullTranscript,
             queryLLM: true,
         };
     } catch (error) {
