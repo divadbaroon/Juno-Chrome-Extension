@@ -1,12 +1,5 @@
-import { OpenAIResponse } from '../../types';
-
-/*
-Queries the large language model using the user's speech and the user's currently selected prompt (from their currently selected profile)
-*/
 export async function generateResponse(usersSpeech: string, prompt: any, apiKey: string, additionalInformation?: string, fileURL?: string): Promise<string> {
   try {
-
-    // Prepare message to be sent to LLM
     let userMessage: any = {
       role: 'user',
       content: [
@@ -14,17 +7,13 @@ export async function generateResponse(usersSpeech: string, prompt: any, apiKey:
       ]
     };
 
-    // If a file was also recieved, add it
     if (fileURL) {
       userMessage.content.push({
         type: "image_url",
-        image_url: {
-          url: fileURL  
-        }
+        image_url: { url: fileURL }
       });
     }
 
-    // Perform LLM query
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -32,7 +21,7 @@ export async function generateResponse(usersSpeech: string, prompt: any, apiKey:
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",  
+        model: "gpt-4o-mini",
         messages: [
           {
             role: 'system',
@@ -48,7 +37,8 @@ export async function generateResponse(usersSpeech: string, prompt: any, apiKey:
           },
           userMessage
         ],
-        max_tokens: 100
+        max_tokens: 1000,
+        stream: true
       })
     });
 
@@ -57,12 +47,61 @@ export async function generateResponse(usersSpeech: string, prompt: any, apiKey:
       throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
     }
 
-    const llmData: OpenAIResponse = await response.json();
-    console.log("OpenAI API Response:", JSON.stringify(llmData, null, 2));
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder();
 
-    // Get and return the response
-    const content = llmData.choices[0].message.content;
-    return content;
+    let buffer = '';
+    let sentenceBuffer = '';
+    let fullResponse = '';
+
+    while (true) {
+      const { done, value } = await reader!.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value);
+      buffer += chunk;
+
+      while (true) {
+        const match = buffer.match(/^data: (.+)\n\n/);
+        if (!match) break;
+
+        const [fullMatch, jsonData] = match;
+        buffer = buffer.slice(fullMatch.length);
+
+        if (jsonData === '[DONE]') {
+          if (sentenceBuffer.trim()) {
+            const finalSentence = sentenceBuffer.trim();
+            console.log('Final sentence:', finalSentence);
+            fullResponse += finalSentence;
+          }
+          return fullResponse;
+        }
+
+        try {
+          const parsedData = JSON.parse(jsonData);
+          const content = parsedData.choices[0].delta.content || '';
+          sentenceBuffer += content;
+
+          const sentences = sentenceBuffer.match(/[^.!?]+[.!?]+/g) || [];
+          for (const sentence of sentences) {
+            const trimmedSentence = sentence.trim();
+            console.log('Completed sentence:', trimmedSentence);
+            fullResponse += trimmedSentence + ' ';
+            sentenceBuffer = sentenceBuffer.slice(sentence.length);
+          }
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      }
+    }
+
+    if (sentenceBuffer.trim()) {
+      const finalSentence = sentenceBuffer.trim();
+      console.log('Final sentence:', finalSentence);
+      fullResponse += finalSentence;
+    }
+
+    return fullResponse.trim();
 
   } catch (error) {
     console.error("Error generating response:", error);
