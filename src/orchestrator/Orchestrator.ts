@@ -3,10 +3,7 @@ import { ShortcutManager } from '../functions/shortcutListener/ShortCutManager';
 import { requestInitialData } from '../fileCommunication/messengers';
 
 /**
- * Manages to overall coordination of the engine and shortcut manager
- * 
- * Specifically: 
- * The engine and shortcut listener to beigin listening for the user's keystrokes.
+ * Initializes the engine and shortcut listener.
  * If the user hold's their assigned shortcut, the engine is initiated
  */
 export class Orchestrator {
