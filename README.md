@@ -1,10 +1,6 @@
 # Juno Chrome Extension
 
-Interact with voice agents from your webbrowser.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+Browse and interact with voice agents from your webbrowser in one click.
 
 ## License
 
