@@ -1,6 +1,6 @@
 # Juno Chrome Extension
 
-Seamless AI integration into your web browser, bringing intelligence to your fingertips.
+An extension for browsing and interacting with voice agents.
 
 ## Contributing
 
