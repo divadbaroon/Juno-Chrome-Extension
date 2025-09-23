@@ -1,6 +1,6 @@
 # Juno Chrome Extension
 
-An extension for browsing and interacting with voice agents.
+Interact with voice agents from your webbrowser.
 
 ## Contributing
 
